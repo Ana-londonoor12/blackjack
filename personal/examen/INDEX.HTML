@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego suma de números</title>
+</head>
+<body> 
+    <h1>Generador de números</h1>
+    <input type="text" id="numeroGenerado" readonly>
+    <br><br>
+    <button id="generar" onclick="generarNumero()">Generar</button>
+    <p id="intentos">Intentos: 0</p>
+    <p id="puntos">Puntos: 0</p>
+
+    <script>
+        var puntos = 0;
+        var intentos = 0;
+
+        function generarNumero() {
+            var numero = Math.floor(Math.random() * 900) + 100;
+            document.getElementById("numeroGenerado").value = numero;
+            calcularPuntos(numero);
+            intentos++;
+            document.getElementById("intentos").textContent = "Intentos: " + intentos;
+        }
+
+        function calcularPuntos(numero) 
+        {
+            if (numero > 900) 
+            {
+                puntos += 1;
+            }
+            if (numero >= 400 && numero <= 500) 
+            {
+                puntos += 3;
+            }
+            if (numero % 2 === 0) 
+            {
+                puntos += 1;
+            }
+            if (esCapicua(numero)) 
+            {
+                puntos += 5;
+            }
+            document.getElementById("puntos").textContent = "Puntos: " + puntos;
+            if (puntos >= 20) 
+            {
+                document.getElementById("generar").disabled = true;
+                if (puntos === 20) 
+                {
+                    window.alert("¡Has ganado!");
+                } 
+                else 
+                {
+                    window.alert("Has perdido. No alcanzaste los 20 puntos.");
+                }
+            }
+        }
+
+        function esCapicua(numero) 
+        {
+            var reverso = 0;
+            var temp = numero;
+            while (temp > 0) 
+            {
+                var residuo = temp % 10;
+                temp = Math.floor(temp / 10);
+                reverso = reverso * 10 + residuo;
+            }
+            if (numero === reverso)
+                return true;
+            else
+                return false;
+        }
+    </script>
+</body>
+</html>

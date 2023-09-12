@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clasificación de Números</title>
+</head>
+<body>
+    <h1>Clasificación de Números</h1>
+    <input type="text" id="numero" placeholder="Ingrese un número">
+    <br><br>
+    <button onclick="determinarClaseNumero()">Lanzar número</button>
+
+    <script>
+        function par(n) {
+            if (n % 2 === 0)
+                return true;
+            else
+                return false;
+        }
+
+        function primo(n) {
+            for (let i = 2; i < n; i++) {
+                if (n % i === 0)
+                    return false;
+            }
+            return true;
+        }
+
+        function capicua(n) {
+            let reverso = 0;
+            let numero = n;
+            while (numero > 0) {
+                let residuo = numero % 10;
+                numero = Math.floor(numero / 10);
+                reverso = reverso * 10 + residuo;
+            }
+            if (n === reverso)
+                return true;
+            else
+                return false;
+        }
+
+        function determinarClaseNumero()
+         {
+            let numero = parseInt(document.getElementById("numero").value);
+
+            if (par(numero))
+                document.write("<h4 style='color:green'>El número " + numero + " es par.</h4>");
+            else
+                document.write("<h4>El número " + numero + " no es par.</h4>");
+
+            if (primo(numero))
+                document.write("<h4 style='color:red'>El número " + numero + " es primo.</h4>");
+            else
+                document.write("<h4>El número " + numero + " no es primo.</h4>");
+
+            if (capicua(numero))
+                window.alert("El número " + numero + " es capicúa.");
+            else
+                window.alert("El número "  + numero + " no es capicúa.");
+        }
+    </script>
+</body>
+</html>
